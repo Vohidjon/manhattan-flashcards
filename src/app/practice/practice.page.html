@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{deck ? deck.deck : "Loading..."}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="deck">
+  <ion-card class="word-card" [hidden]="flipped" (click)="flip()">
+    <ion-card-content>
+        <ion-button class="status" [color]="statusStyles[activeCard.status - 1].color" size="small">
+          {{statusStyles[activeCard.status - 1].title}}
+        </ion-button>
+      <div class="word">{{activeCard.word}}</div>
+    </ion-card-content>
+    <ion-button class="flipper" expand="full" color="light">
+      Tap to see meaning <ion-icon name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-card>
+  <ion-card class="word-card" [hidden]="!flipped">
+    <ion-card-content>
+        <ion-button class="status" [color]="statusStyles[activeCard.status - 1].color" size="small">
+          {{statusStyles[activeCard.status - 1].title}}
+        </ion-button>
+      <div class="word">{{activeCard.word}}</div>
+      <div style="color: #000">{{activeCard.def}}</div>
+    </ion-card-content>
+    <ion-button class="knew" expand="full" fill="clear" color="success" (click)="knew()">
+      <ion-icon name="checkmark"></ion-icon> I knew this word
+    </ion-button>
+    <ion-button class="noknew" expand="full" fill="clear" color="danger" (click)="noknew()">
+        <ion-icon name="close"></ion-icon> I didn't know this word
+    </ion-button>
+  </ion-card>
+  <div class="stat-bar-wrapper">
+    <div class="stat-bar">
+      <div class="title">You have mastered {{masteredCount()}} out of {{deck.cards.length}}</div>
+      <ion-progress-bar [value]="masteredCount() / this.deck.cards.length" color="success"></ion-progress-bar>
+      <ion-progress-bar [value]="masteredCount() / this.deck.cards.length" color="success"></ion-progress-bar>
+      <ion-progress-bar [value]="masteredCount() / this.deck.cards.length" color="success"></ion-progress-bar>
+      <ion-progress-bar [value]="masteredCount() / this.deck.cards.length" color="success"></ion-progress-bar>
+    </div>
+    <div class="stat-bar">
+      <div class="title">You are reviewing {{reviewingCount()}} out of {{deck.cards.length}}</div>
+      <ion-progress-bar [value]="reviewingCount() / this.deck.cards.length" color="warning"></ion-progress-bar>
+      <ion-progress-bar [value]="reviewingCount() / this.deck.cards.length" color="warning"></ion-progress-bar>
+      <ion-progress-bar [value]="reviewingCount() / this.deck.cards.length" color="warning"></ion-progress-bar>
+      <ion-progress-bar [value]="reviewingCount() / this.deck.cards.length" color="warning"></ion-progress-bar>
+    </div>
+    <div class="stat-bar">
+      <div class="title">You are learning {{learningCount()}} out of {{deck.cards.length}}</div>
+      <ion-progress-bar [value]="learningCount() / this.deck.cards.length" color="danger"></ion-progress-bar>
+      <ion-progress-bar [value]="learningCount() / this.deck.cards.length" color="danger"></ion-progress-bar>
+      <ion-progress-bar [value]="learningCount() / this.deck.cards.length" color="danger"></ion-progress-bar>
+      <ion-progress-bar [value]="learningCount() / this.deck.cards.length" color="danger"></ion-progress-bar>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,51 @@
+.word-card {
+  margin-bottom: 15px;
+}
+
+.word-card .status {
+  width: 100px;
+  position: absolute; 
+  right: 5px; 
+  top: 5px;
+  text-transform: none !important;
+}
+
+.word-card .noknew {
+  margin: 0; 
+  background-color: rgba(240, 65, 65, 0.5);
+  text-transform: none !important;
+  height: 50px;
+}
+
+.word-card .knew {
+  margin: 0; 
+  background-color: rgba(16, 220, 96, 0.5);
+  text-transform: none !important;
+  height: 50px;
+}
+
+.word-card .flipper {
+  margin: 0;
+  text-transform: none !important;
+  height: 50px;
+}
+
+.word-card .word {
+  text-align: center; 
+  padding: 30px 0 20px 0; 
+  font-size: 30px;
+  color: #000;
+}
+
+.stat-bar-wrapper {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 10px;
+}
+
+.stat-bar-wrapper .stat-bar {
+  margin-bottom: 10px;
+}
+
+.stat-bar-wrapper .stat-bar .title {
+  font-size: 16px;
+}

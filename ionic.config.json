@@ -1,0 +1,7 @@
+{
+  "name": "manhattan-flashcards",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
