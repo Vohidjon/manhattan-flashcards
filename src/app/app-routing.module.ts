@@ -15,7 +15,8 @@ const routes: Routes = [
     path: 'practice/:index', 
     loadChildren: './practice/practice.module#PracticePageModule' 
   },
-  { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' }
+  { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
+  { path: 'import', loadChildren: './import/import.module#ImportPageModule' }
 ];
 
 @NgModule({

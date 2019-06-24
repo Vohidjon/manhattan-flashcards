@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { STATUSES } from '../constants';
 
 @Component({
   selector: 'app-settings',
@@ -13,7 +14,15 @@ export class SettingsPage implements OnInit {
     private router: Router) { }
 
   reset() {
-    this.storage.clear().then(() => this.router.navigate(['/home']));
+    this.storage.get('progress').then(progress => {
+      progress.forEach(deck => {
+        deck.cards.forEach(card => {
+          card.status = STATUSES.UNSEEN;
+          card.knewCount = 0;
+        });
+      });
+      this.storage.set('progress', progress).then(() => this.router.navigate(['/home']));
+    });
   }
 
   ngOnInit() {

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Import deck</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label position="stacked">Title</ion-label>
+    <ion-input [(ngModel)]="model.title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">&lt;&lt;Word&gt;&gt;/&lt;&lt;Line&gt;&gt; Data</ion-label>
+    <ion-textarea [(ngModel)]="model.dataStr"></ion-textarea>
+  </ion-item>
+  <div style="padding: 10px 0; color: red" [hidden]="!errorMessage">{{errorMessage}}</div>
+  <ion-button expand="block" (click)="createDeck()">Create</ion-button>
+</ion-content>

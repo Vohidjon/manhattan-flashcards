@@ -1,7 +1,8 @@
 import { STATUSES } from './../constants';
 import { Storage } from '@ionic/storage';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-practice',
@@ -27,7 +28,9 @@ export class PracticePage implements OnInit {
     color: 'success'
   }]
   constructor(private activatedRoute: ActivatedRoute,
-    private storage: Storage) {
+    private router: Router,
+    private storage: Storage,
+    private actionSheetCtrl: ActionSheetController) {
     this.storage.get('progress').then(progress => {
       this.progress = progress;
       this.deck = progress[this.activatedRoute.snapshot.paramMap.get('index')];
@@ -98,6 +101,35 @@ export class PracticePage implements OnInit {
 
   learningCount () {
     return this.deck.cards.filter(card => card.status == STATUSES.LEARNING).length;
+  }
+
+  presentActionSheet() {
+    this.actionSheetCtrl.create({
+      header: "Actions",
+      buttons: [{
+        text: 'Delete',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.progress.splice(this.activatedRoute.snapshot.paramMap.get('index'), 1);
+          this.storage.set('progress', this.progress).then(() => this.router.navigate(['/']));
+        }
+      }, {
+        text: 'Reset',
+        icon: 'refresh',
+        handler: () => {
+          this.deck.cards.forEach(card => {
+            card.status = STATUSES.UNSEEN;
+            card.knewCount = 0;
+          });
+          this.storage.set('progress', this.progress).then(() => {
+            this.activeCard = null;
+            this.next();
+            this.flipped = false;
+          });
+        }
+      }]
+    }).then(actionSheet => actionSheet.present());
   }
 
   ngOnInit() {

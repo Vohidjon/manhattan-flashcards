@@ -16,6 +16,11 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Import',
+      url: '/import',
+      icon: 'code-download'
+    },
+    {
       title: 'Settings',
       url: '/settings',
       icon: 'settings'
